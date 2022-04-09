@@ -21,7 +21,7 @@ services:
        - "8888"
 
      volumes:
-      - "/home/${UNAME}/comp_code:/workspace/working"
+      - "/home/${UNAME}/data:/workspace/working/data"
       - "/home/${UNAME}/.jupyter/:/home/${UNAME}/.jupyter"
      
      container_name: ${SERVICE}
