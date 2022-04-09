@@ -1,0 +1,51 @@
+version: '3.9'
+services:
+    py7:
+     user: $UID:$GID
+
+     build: 
+       context: .
+       dockerfile: ./Dockerfile
+       args:
+         UID: $UID
+         GID: $GID
+         UNAME: $UNAME
+         SERVICE: $SERVICE
+    
+     hostname: tomoki
+     
+     ports:
+      - "8888:8888"
+
+     expose:
+       - "8888"
+
+     volumes:
+      - "/home/${UNAME}/comp_code:/workspace/working"
+      - "/home/${UNAME}/.jupyter/:/home/${UNAME}/.jupyter"
+     
+     container_name: ${SERVICE}
+
+     #env_file: my_env_file.env
+
+     tty: true
+     
+     #entrypoint: >
+     # jupyter-lab
+     # --no-browser 
+     # --ip=0.0.0.0 
+     # --notebook-dir=/workspace/working 
+     # --allow-root 
+     # --NotebookApp.token=''
+
+    
+    
+    # deploy:
+    #  resources:
+    #    reservations:
+    #     devices:
+    #      - driver: nvidia
+    #        count: all
+    #        capabilities: [gpu]
+
+   
